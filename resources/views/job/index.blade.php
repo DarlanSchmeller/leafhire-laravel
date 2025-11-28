@@ -1,4 +1,6 @@
 <x-layout>
+    <x-search-bar />
+
     @foreach ($jobs as $job)
         <x-card class="mb-6">
             <div class="flex justify-between items-start mb-3">
