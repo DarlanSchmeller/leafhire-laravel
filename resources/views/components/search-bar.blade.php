@@ -5,7 +5,7 @@
     'categories' => [],
 ])
 
-<div class="w-full max-w-5xl mx-auto">
+<div class="w-full max-w-5xl mx-auto my-12">
     <form action="#" method="GET"
         class="bg-white rounded-3xl shadow-lg shadow-gray-200/50 p-4 md:px-6 flex flex-col gap-6 md:flex-row md:items-center">
         @csrf
@@ -50,7 +50,7 @@
 
         <button type="submit"
             class="w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-2xl font-medium
-            transition-colors duration-200">
+            transition-colors duration-200 cursor-pointer">
             Search
         </button>
     </form>
