@@ -9,7 +9,7 @@
 @if (!empty($route))
     <a href="{{ $route }}"
        {{ $attributes->class([
-            'block bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors duration-200 cursor-pointer text-center',
+            'block bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold transition-colors duration-200 cursor-pointer text-center',
             $rounded,
             $padding,
             'w-full' => $fullWidth,
@@ -19,7 +19,7 @@
 @else
     <button type="{{ $type }}"
         {{ $attributes->class([
-            'block bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors duration-200 cursor-pointer text-center',
+            'block bg-gray-100 hover:bg-gray-200 text-gray-900 font-bold transition-colors duration-200 cursor-pointer text-center',
             $rounded,
             $padding,
             'w-full' => $fullWidth,

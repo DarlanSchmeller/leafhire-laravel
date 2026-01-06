@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\JobListing;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $jobs = JobListing::latest()->get();
-        return view('job.index')->with('jobs',$jobs);
+        return view('jobs.index')->with('jobs',$jobs);
     }
 
     /**
@@ -35,9 +36,9 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(JobListing $job): View
     {
-        //
+        return view('jobs.show')->with('job', $job);
     }
 
     /**
