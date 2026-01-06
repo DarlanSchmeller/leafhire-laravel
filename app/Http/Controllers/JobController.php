@@ -14,7 +14,32 @@ class JobController extends Controller
     public function index(): View
     {
         $jobs = JobListing::latest()->get();
-        return view('jobs.index')->with('jobs',$jobs);
+        $categories = JobListing::$category;
+        
+        return view('jobs.index')->with([
+            'jobs' => $jobs,
+            'categories' => $categories
+        ]);
+    }
+
+    public function search(Request $request): View
+    {
+        $jobs = JobListing::query();
+        $queryParams = $request->query();
+
+        $jobs->when($queryParams, function ($query) use ($queryParams) {
+            $query->where('title', 'LIKE', '%' . $queryParams['keyword'] . '%');
+            $query->where('location', 'LIKE', '%' . $queryParams['location'] . '%');
+            $query->where('category', 'LIKE', '%' . $queryParams['category'] . '%');
+        });
+
+        $jobs = $jobs->get();
+        $categories = JobListing::$category;
+        
+        return view('jobs.index')->with([
+            'jobs' => $jobs,
+            'categories' => $categories
+        ]);
     }
 
     /**

@@ -1,5 +1,5 @@
 <x-layout>
-    <x-search-bar />
+    <x-search-bar :categories="$categories" />
 
     @foreach ($jobs as $job)
         <x-job-card :job="$job" />
