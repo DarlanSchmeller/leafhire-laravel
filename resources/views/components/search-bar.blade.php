@@ -6,7 +6,7 @@
 ])
 
 <div class="w-full max-w-5xl mx-auto my-12">
-    <form action="{{ route('search') }}" method="GET"
+    <div
         class="bg-white rounded-3xl shadow-lg shadow-gray-200/50 p-4 md:px-6 flex flex-col gap-6 md:flex-row md:items-center">
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 flex-1">
@@ -52,5 +52,5 @@
         <x-button type="submit">
             Search
         </x-button>
-    </form>
+    </div>
 </div>

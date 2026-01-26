@@ -1,5 +1,5 @@
 @props([
-    'job' => null
+    'job' => null,
 ])
 
 <div class="bg-white rounded-3xl p-8 sticky top-24">
@@ -40,7 +40,7 @@
                 <x-heroicon-o-clock class="w-5 h-5 text-blue-600 mt-0.5" />
                 <div>
                     <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Experience</p>
-                    <p class="text-sm text-gray-900 font-medium mt-1">{{ $job->experience }}</p>
+                    <p class="text-sm text-gray-900 font-medium mt-1">{{ ucfirst($job->experience) }}</p>
                 </div>
             </div>
 

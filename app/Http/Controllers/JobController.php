@@ -13,9 +13,9 @@ class JobController extends Controller
      */
     public function index(): View
     {
-        $jobs = JobListing::latest()->get();
+        $jobs = JobListing::latest()->paginate(10);
         $categories = JobListing::$category;
-        
+
         return view('jobs.index')->with([
             'jobs' => $jobs,
             'categories' => $categories
@@ -25,17 +25,50 @@ class JobController extends Controller
     public function search(Request $request): View
     {
         $jobs = JobListing::query();
-        $queryParams = $request->query();
 
-        $jobs->when($queryParams, function ($query) use ($queryParams) {
-            $query->where('title', 'LIKE', '%' . $queryParams['keyword'] . '%');
-            $query->where('location', 'LIKE', '%' . $queryParams['location'] . '%');
-            $query->where('category', 'LIKE', '%' . $queryParams['category'] . '%');
-        });
+        $filters = $request->only([
+            'keyword',
+            'location',
+            'category',
+            'experience',
+            'min_salary',
+            'max_salary',
+        ]);
 
-        $jobs = $jobs->get();
+        $jobs->when(
+            filled($filters['keyword'] ?? null),
+            fn($q) =>
+            $q->where('title', 'LIKE', '%' . $filters['keyword'] . '%')
+        )
+            ->when(
+                filled($filters['location'] ?? null),
+                fn($q) =>
+                $q->where('location', 'LIKE', '%' . $filters['location'] . '%')
+            )
+            ->when(
+                filled($filters['category'] ?? null),
+                fn($q) =>
+                $q->where('category', $filters['category'])
+            )
+            ->when(
+                filled($filters['experience'] ?? null),
+                fn($q) =>
+                $q->where('experience', $filters['experience'])
+            )
+            ->when(
+                filled($filters['min_salary'] ?? null),
+                fn($q) =>
+                $q->where('salary', '>=', (int) $filters['min_salary'])
+            )
+            ->when(
+                filled($filters['max_salary'] ?? null),
+                fn($q) =>
+                $q->where('salary', '<=', (int) $filters['max_salary'])
+            );
+
+        $jobs = $jobs->paginate(10);
         $categories = JobListing::$category;
-        
+
         return view('jobs.index')->with([
             'jobs' => $jobs,
             'categories' => $categories

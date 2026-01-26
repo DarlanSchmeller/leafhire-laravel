@@ -1,12 +1,12 @@
 @props([
-    'job' => null
+    'job' => null,
 ])
 
 <div class="bg-white rounded-3xl p-8 md:p-10">
 
     <div class="mb-8">
         <span class="inline-flex items-center px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-medium mb-4">
-            {{ $job->experience }}
+            {{ ucfirst($job->experience) }}
         </span>
 
         <h1 class="text-5xl font-bold text-gray-900 mb-3">
