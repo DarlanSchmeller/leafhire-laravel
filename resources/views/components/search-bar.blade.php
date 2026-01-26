@@ -17,7 +17,7 @@
 
                 <input type="text" name="keyword" value="{{ old('keyword', request()->query('keyword')) }}"
                     placeholder="Job title or keyword"
-                    class="w-full bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none text-base" />
+                    class="w-full bg-transparent text-green-900 placeholder-gray-400 focus:outline-none text-base" />
             </div>
 
             <div
@@ -27,7 +27,7 @@
 
                 <input type="text" name="location" value="{{ old('location', request()->query('location')) }}"
                     placeholder="Location"
-                    class="w-full bg-transparent text-gray-900 placeholder-gray-400 focus:outline-none text-base" />
+                    class="w-full bg-transparent text-green-900 placeholder-gray-400 focus:outline-none text-base" />
             </div>
 
             <div
@@ -36,7 +36,7 @@
                 <x-heroicon-o-briefcase class="w-5 h-5 text-gray-400 shrink-0" />
 
                 <select name="category"
-                    class="w-full bg-transparent text-gray-900 focus:outline-none text-base cursor-pointer">
+                    class="w-full bg-transparent text-green-900 focus:outline-none text-base cursor-pointer">
                     <option value="">All categories</option>
 
                     @foreach ($categories as $cat)

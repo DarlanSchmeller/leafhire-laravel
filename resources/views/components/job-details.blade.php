@@ -5,11 +5,11 @@
 <div class="bg-white rounded-3xl p-8 md:p-10">
 
     <div class="mb-8">
-        <span class="inline-flex items-center px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-medium mb-4">
+        <span class="inline-flex items-center px-3 py-1 rounded-lg bg-lime-50 text-lime-600 text-sm font-medium mb-4">
             {{ ucfirst($job->experience) }}
         </span>
 
-        <h1 class="text-5xl font-bold text-gray-900 mb-3">
+        <h1 class="text-5xl font-bold text-green-900 mb-3">
             {{ $job->title }}
         </h1>
 
@@ -24,7 +24,7 @@
 
             <div>
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Location</p>
-                <p class="text-base font-medium text-gray-900 flex items-center gap-2">
+                <p class="text-base font-medium text-green-900 flex items-center gap-2">
                     <x-heroicon-o-map-pin class="w-4 h-4 text-gray-400" />
                     {{ $job->location }}
                 </p>
@@ -32,7 +32,7 @@
 
             <div>
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Salary</p>
-                <p class="text-base font-medium text-gray-900 flex items-center gap-2">
+                <p class="text-base font-medium text-green-900 flex items-center gap-2">
                     <x-heroicon-o-currency-dollar class="w-4 h-4 text-gray-400" />
                     ${{ number_format($job->salary, 0, '', ',') }}
                 </p>
@@ -40,7 +40,7 @@
 
             <div>
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Category</p>
-                <p class="text-base font-medium text-gray-900 flex items-center gap-2">
+                <p class="text-base font-medium text-green-900 flex items-center gap-2">
                     <x-heroicon-o-briefcase class="w-4 h-4 text-gray-400" />
                     {{ $job->category }}
                 </p>
@@ -48,7 +48,7 @@
 
             <div>
                 <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Posted</p>
-                <p class="text-base font-medium text-gray-900 flex items-center gap-2">
+                <p class="text-base font-medium text-green-900 flex items-center gap-2">
                     <x-heroicon-o-clock class="w-4 h-4 text-gray-400" />
                     {{ $job->created_at->format('M d, Y') }}
                 </p>
@@ -58,7 +58,7 @@
     </div>
 
     <div>
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">
+        <h2 class="text-3xl font-bold text-green-900 mb-6">
             About this role
         </h2>
 

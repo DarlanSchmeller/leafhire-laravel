@@ -6,14 +6,14 @@ cursor-pointer group">
     <a href="{{ route('jobs.show', $job->id) }}">
         <div class="flex items-start justify-between mb-4">
             <div class="flex-1">
-                <h3 class="text-xl font-semibold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                <h3 class="text-xl font-semibold text-green-900 mb-1 group-hover:text-lime-600 transition-colors">
                     {{ $job->title }}
                 </h3>
                 <p class="text-base font-medium text-gray-600">{{ $job->company }}</p>
             </div>
 
             <div class="ml-4 shrink-0">
-                <span class="inline-flex items-center px-3 py-1 rounded-lg bg-blue-50 text-blue-700 text-sm font-medium">
+                <span class="inline-flex items-center px-3 py-1 rounded-lg bg-lime-50 text-lime-600 text-sm font-medium">
                     {{ ucfirst($job->experience) }}
                 </span>
             </div>
@@ -40,7 +40,7 @@ cursor-pointer group">
                 <x-heroicon-o-clock class="w-4 h-4" />
                 <span>{{ \Carbon\Carbon::parse($job->created_at)->diffForHumans() }}</span>
             </div>
-            <span class="text-blue-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+            <span class="text-lime-600 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                 View details →
             </span>
         </div>

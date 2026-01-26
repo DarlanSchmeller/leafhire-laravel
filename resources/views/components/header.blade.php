@@ -1,22 +1,20 @@
-<header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md">
+<header class="sticky top-0 z-40 backdrop-blur-xs bg-blue-50/20">
     <div class="max-w-7xl mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
 
             <a href="{{ route('jobs.index') }}" class="flex items-center gap-2 group">
-                <div
-                    class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center group-hover:bg-blue-700
-                    transition-colors">
-                    <x-heroicon-o-briefcase class="w-5 h-5 text-white" />
+                <div class="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center">
+                    <img src="{{ asset('images/leafhire.webp') }}" alt="LeafHire Icon" class="w-14 h-14 object-contain" />
                 </div>
 
-                <span class="text-xl font-bold text-gray-900">
-                    JobBoard
+                <span class="text-xl font-bold text-lime-600 font-">
+                    Leaf<span class="text-lime-900">Hire</span>
                 </span>
             </a>
 
             <nav class="flex items-center gap-8">
                 <a href="{{ route('jobs.index') }}"
-                    class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                    class="text-green-600 hover:text-green-800 font-bold transition-colors rounded-lg py-2 px-4 border-2 border-lime-600 hover:border-lime-800">
                     Browse Jobs
                 </a>
 
