@@ -19,7 +19,6 @@ cursor-pointer group">
             </div>
         </div>
 
-        {{-- Job Details --}}
         <div class="flex flex-wrap gap-4 text-sm text-gray-600 mb-4">
             <div class="flex items-center gap-1.5">
                 <x-heroicon-o-map-pin class="w-4 h-4" />
