@@ -9,7 +9,7 @@ cursor-pointer group">
                 <h3 class="text-xl font-semibold text-green-900 mb-1 group-hover:text-lime-600 transition-colors">
                     {{ $job->title }}
                 </h3>
-                <p class="text-base font-medium text-gray-600">{{ $job->company }}</p>
+                <p class="text-base font-medium text-gray-600">{{ $job->employer->company_name }}</p>
             </div>
 
             <div class="ml-4 shrink-0">

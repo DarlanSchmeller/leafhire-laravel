@@ -15,7 +15,7 @@
 
         <div class="flex items-center gap-2 text-lg text-gray-600">
             <x-heroicon-o-building-office-2 class="w-5 h-5" />
-            <span class="font-medium">{{ $job->company }}</span>
+            <span class="font-medium">{{ $job->employer->company_name }}</span>
         </div>
     </div>
 

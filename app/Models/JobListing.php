@@ -42,6 +42,9 @@ class JobListing extends Model
             filled($filters['keyword'] ?? null),
             fn($q) =>
             $q->where('title', 'LIKE', '%' . $filters['keyword'] . '%')
+                ->OrWhereHas('employer', function ($query) use ($filters) {
+                    $query->where('company_name', 'LIKE', '%' . $filters['keyword'] . '%');
+                })
         )
             ->when(
                 filled($filters['location'] ?? null),
