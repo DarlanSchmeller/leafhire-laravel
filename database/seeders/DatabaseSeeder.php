@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Employer;
+use App\Models\JobApplication;
 use App\Models\JobListing;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,5 +26,16 @@ class DatabaseSeeder extends Seeder
         $employers = Employer::all()->shuffle();
 
         JobListing::factory(100)->recycle($employers)->create();
+
+        foreach ($users as $user) {
+            $jobs = JobListing::take(rand(0, 4))->get();
+
+            foreach ($jobs as $job) {
+                JobApplication::factory()->create([
+                    'job_listing_id' => $job->id,
+                    'user_id' => $user->id
+                ]);
+            }
+        }
     }
 }
