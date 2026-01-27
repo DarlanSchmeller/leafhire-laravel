@@ -24,8 +24,6 @@ class JobController extends Controller
 
     public function search(Request $request): View
     {
-        $jobs = JobListing::query();
-
         $filters = $request->only([
             'keyword',
             'location',
@@ -35,38 +33,8 @@ class JobController extends Controller
             'max_salary',
         ]);
 
-        $jobs->when(
-            filled($filters['keyword'] ?? null),
-            fn($q) =>
-            $q->where('title', 'LIKE', '%' . $filters['keyword'] . '%')
-        )
-            ->when(
-                filled($filters['location'] ?? null),
-                fn($q) =>
-                $q->where('location', 'LIKE', '%' . $filters['location'] . '%')
-            )
-            ->when(
-                filled($filters['category'] ?? null),
-                fn($q) =>
-                $q->where('category', $filters['category'])
-            )
-            ->when(
-                filled($filters['experience'] ?? null),
-                fn($q) =>
-                $q->where('experience', $filters['experience'])
-            )
-            ->when(
-                filled($filters['min_salary'] ?? null),
-                fn($q) =>
-                $q->where('salary', '>=', (int) $filters['min_salary'])
-            )
-            ->when(
-                filled($filters['max_salary'] ?? null),
-                fn($q) =>
-                $q->where('salary', '<=', (int) $filters['max_salary'])
-            );
+        $jobs = JobListing::query()->filter($filters)->paginate(10);
 
-        $jobs = $jobs->paginate(10);
         $categories = JobListing::$category;
 
         return view('jobs.index')->with([

@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between">
 
             <a href="{{ route('jobs.index') }}" class="flex items-center gap-3">
-                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-blue-50 flex items-center justify-center">
+                <div class="w-12 h-12 md:w-16 md:h-16 rounded-2xl bg-lime-50/50 flex items-center justify-center">
                     <img src="{{ asset('images/leafhire.webp') }}" alt="LeafHire Icon"
                         class="w-9 h-9 md:w-14 md:h-14 object-contain" />
                 </div>
@@ -15,7 +15,7 @@
 
             <nav class="hidden md:flex items-center gap-8">
                 <a href="{{ route('jobs.index') }}"
-                    class="text-lime-700 hover:text-lime-900 font-semibold transition rounded-lg py-2 px-4 border border-lime-600/60 hover:border-lime-800 bg-gray-50">
+                    class="text-lime-700 hover:text-lime-900 font-semibold transition rounded-lg py-2 px-4 border border-lime-600/60 hover:border-lime-800 bg-lime-50/50">
                     Browse Jobs
                 </a>
 
@@ -38,7 +38,7 @@
         class="md:hidden absolute top-full inset-x-0 backdrop-blur-xs">
         <div class="px-6 py-6 space-y-4">
             <a href="{{ route('jobs.index') }}"
-                class="block w-full text-center py-3 rounded-xl font-semibold text-lime-700 border border-lime-600/60 bg-white hover:bg-lime-50 transition">
+                class="block w-full text-center py-3 rounded-xl font-semibold text-lime-700 border border-lime-600/60 bg-lime-50/50 hover:bg-lime-50 transition">
                 Browse Jobs
             </a>
 
