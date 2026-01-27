@@ -5,15 +5,18 @@ use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    Route::get('register', [AuthenticationController::class, 'register'])->name('register');
     Route::get('login', [AuthenticationController::class, 'login'])->name('login');
     Route::post('login', [AuthenticationController::class, 'auth'])->name('login.auth');
 });
 
-Route::middleware('auth')->group(function () {});
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
+});
 
 Route::get('/', fn() => redirect()->route('jobs.index'));
 
 Route::resource('jobs', JobController::class)
     ->only(['index', 'show']);
 
-Route::get('search/', [JobController::class, 'search'])->name('search');
+Route::get('search', [JobController::class, 'search'])->name('search');

@@ -13,16 +13,28 @@
                 </span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-8">
+            <nav class="hidden md:flex items-center gap-6">
                 <a href="{{ route('jobs.index') }}"
                     class="text-lime-700 hover:text-lime-900 font-semibold transition rounded-lg py-2 px-4 border border-lime-600/60 hover:border-lime-800 bg-lime-50/50">
                     Browse Jobs
                 </a>
 
-                <x-button padding="px-6 py-2.5" rounded="rounded-xl">
-                    Post a Job
-                </x-button>
+                @guest
+                    <x-button :route="route('login')" padding="px-6 py-2.5" rounded="rounded-xl">
+                        Login
+                    </x-button>
+                @endguest
+
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-button type="submit" padding="px-6 py-2.5" rounded="rounded-xl">
+                            Logout
+                        </x-button>
+                    </form>
+                @endauth
             </nav>
+
 
             <button @click="open = !open"
                 class="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition"
@@ -42,10 +54,19 @@
                 Browse Jobs
             </a>
 
-            <a href="#"
-                class="block w-full text-center py-3 rounded-xl font-semibold text-white bg-lime-600 hover:bg-lime-700 transition">
-                Post a Job
-            </a>
+            @guest
+                <x-button :route="route('login')" padding="py-3" rounded="rounded-xl" fullWidth>
+                    Login
+                </x-button>
+            @endguest
+
+            @auth
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <x-button type="submit" padding="py-3" rounded="rounded-xl" fullWidth>
+                        Logout
+                    </x-button>
+                </form>
+            @endauth
         </div>
-    </div>
 </header>
