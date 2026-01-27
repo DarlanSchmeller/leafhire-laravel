@@ -22,7 +22,9 @@
 
 
     <div class="relative z-10">
-        <x-header />
+        @if (request()->route()->getName() !== 'login')
+            <x-header />
+        @endif
         <div class="max-w-7xl mx-auto py-12 space-y-6 px-6 md:px-0">
             {{ $slot }}
         </div>
