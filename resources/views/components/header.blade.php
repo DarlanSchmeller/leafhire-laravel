@@ -1,5 +1,5 @@
 <header x-data="{ open: false }" class="sticky top-0 z-40 backdrop-blur bg-blue-50/30">
-    <div class="max-w-7xl mx-auto px-6 py-4">
+    <div class="max-w-7xl mx-auto py-4">
         <div class="flex items-center justify-between">
 
             <a href="{{ route('jobs.index') }}" class="flex items-center gap-3">
