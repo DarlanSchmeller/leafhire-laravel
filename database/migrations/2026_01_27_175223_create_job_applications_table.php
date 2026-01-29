@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('job_applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained()->unique();
             $table->foreignIdFor(JobListing::class)->constrained();
 
-            $table->unsignedInteger('expected_salary');
+            $table->unsignedBigInteger('expected_salary');
+
+            $table->unique(['job_listing_id', 'user_id']);
 
             $table->timestamps();
         });

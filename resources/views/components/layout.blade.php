@@ -27,7 +27,27 @@
         @if (request()->route()->getName() !== 'login')
             <x-header />
         @endif
+
         <div class="max-w-7xl mx-auto py-12 space-y-6 px-6 md:px-0">
+            @if (session('success'))
+                <div class="rounded-xl border border-green-200 bg-green-50 p-4 text-green-800 flex items-start gap-3">
+                    <x-heroicon-o-check-circle class="w-6 h-6 text-green-600 shrink-0 mt-0.5" />
+                    <div>
+                        <p class="font-semibold">Success 🎉</p>
+                        <p class="text-sm">{{ session('success') }}</p>
+                    </div>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="rounded-xl border border-red-200 bg-red-50 p-4 text-red-800 flex items-start gap-3">
+                    <x-heroicon-o-x-circle class="w-6 h-6 text-red-600 shrink-0 mt-0.5" />
+                    <div>
+                        <p class="font-semibold">Oops 😬</p>
+                        <p class="text-sm">{{ session('error') }}</p>
+                    </div>
+                </div>
+            @endif
             {{ $slot }}
         </div>
     </div>

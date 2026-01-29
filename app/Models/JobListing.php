@@ -81,6 +81,6 @@ class JobListing extends Model
 
     public function jobApplications(): HasMany
     {
-        return $this->hasMany(JobListing::class);
+        return $this->hasMany(JobApplication::class);
     }
 }
