@@ -48,7 +48,7 @@
     </div>
 
     <div class="pt-8 border-t border-gray-200 space-y-3">
-        <x-button :full-width="true">Apply now</x-button>
+        <x-button :route="route('job.application.create', $job->id)" :full-width="true">Apply now</x-button>
         <x-secondary-button :full-width="true">Save job</x-secondary-button>
     </div>
 
