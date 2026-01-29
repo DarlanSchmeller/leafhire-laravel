@@ -48,8 +48,12 @@
     </div>
 
     <div class="pt-8 border-t border-gray-200 space-y-3">
-        <x-button :route="route('job.application.create', $job->id)" :full-width="true">Apply now</x-button>
-        <x-secondary-button :full-width="true">Save job</x-secondary-button>
+        @can('apply', $job)
+            <x-button :route="route('job.application.create', $job->id)" :full-width="true">Apply now</x-button>
+        @else
+            <x-secondary-button :full-width="true">Already applied</x-button>
+            @endcan
+            <x-secondary-button :full-width="true">Save job</x-secondary-button>
     </div>
 
 </div>

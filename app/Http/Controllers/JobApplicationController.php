@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
 use App\Models\JobListing;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -11,11 +12,16 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class JobApplicationController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Show the form for creating a new job application.
      */
-    public function create(JobListing $job): View
+    public function create(JobListing $job): View|RedirectResponse
     {
+        if (!Auth::user()->can('apply', $job)) {
+            return back()->with('error', 'You have already applied to this job');
+        };
         return view('job_applications.create')->with('job', $job);
     }
 
@@ -25,7 +31,7 @@ class JobApplicationController extends Controller
     public function store(JobListing $job, Request $request): RedirectResponse
     {
         $user = Auth::user();
-        $alreadyApplied = $user->jobApplications()->where('job_listing_id', $job->id)->exists();
+        $alreadyApplied = $job->hasUserApplied($user);
 
         if ($alreadyApplied) {
             return back()->with('error', 'You have already applied to this job');
