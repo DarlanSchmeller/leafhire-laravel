@@ -64,7 +64,12 @@ class JobController extends Controller
      */
     public function show(JobListing $job): View
     {
-        return view('jobs.show')->with('job', $job);
+        $relatedJobs = $job->employer->jobs->where('id', '!=', $job->id)->take(4);
+
+        return view('jobs.show')->with([
+            'job' => $job,
+            'relatedJobs' => $relatedJobs
+        ]);
     }
 
     /**

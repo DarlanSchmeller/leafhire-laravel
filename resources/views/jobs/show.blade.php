@@ -27,7 +27,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        @foreach ($job->employer->jobs->where('id', '!=', $job->id)->take(4) as $relatedJob)
+                        @foreach ($relatedJobs as $relatedJob)
                             <x-job-card :job="$relatedJob" />
                         @endforeach
                     </div>
