@@ -37,12 +37,19 @@ class JobApplicationController extends Controller
             return back()->with('error', 'You have already applied to this job');
         }
 
+        $validatedData = $request->validate([
+            'expected_salary' => 'required|string|min:3',
+            'cv' => 'required|file|mimes:pdf|max:2048'
+        ]);
+
+        $file = $request->file('cv');
+        $path = $file->store('csv', 'private');
+
         $job->jobApplications()->create([
             'user_id' => $user->id,
             'job_listing_id' => $job->id,
-            ...$request->validate([
-                'expected_salary' => 'required|string|min:3'
-            ])
+            'expected_salary' => $validatedData['expected_salary'],
+            'cv_path' => $path
         ]);
 
         return redirect()->route('jobs.show', $job->id)->with('success', 'You have successfully applied to this job!');

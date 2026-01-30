@@ -14,7 +14,8 @@ class JobApplication extends Model
     protected $fillable = [
         'user_id',
         'expected_salary',
-        'job_listing_id'
+        'job_listing_id',
+        'cv_path'
     ];
 
     public function job(): BelongsTo

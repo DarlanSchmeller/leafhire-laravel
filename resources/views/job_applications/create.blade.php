@@ -55,7 +55,7 @@
                         </h2>
 
                         <form method="POST" action="{{ route('job.application.store', $job) }}"
-                            class="flex flex-col gap-6">
+                            class="flex flex-col gap-6" enctype="multipart/form-data">
                             @csrf
 
                             <x-input name="expected_salary" placeholder="Expected salary" required>
@@ -63,6 +63,12 @@
                                     <x-heroicon-o-currency-dollar class="w-5 h-5 text-gray-400 shrink-0" />
                                 </x-slot:icon>
                             </x-input>
+
+                            <x-input-file name="cv" placeholder="Upload your CV (PDF)">
+                                <x-slot:icon>
+                                    <x-heroicon-o-paper-clip class="w-5 h-5 text-gray-400 shrink-0" />
+                                </x-slot:icon>
+                            </x-input-file>
 
                             <x-button type="submit">
                                 Apply now
