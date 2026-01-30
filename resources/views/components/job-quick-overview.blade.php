@@ -51,7 +51,11 @@
         @can('apply', $job)
             <x-button :route="route('job.application.create', $job->id)" :full-width="true">Apply now</x-button>
         @else
-            <x-secondary-button :full-width="true">Already applied</x-button>
+            @auth
+                <x-secondary-button :full-width="true">Already applied</x-button>
+                @else
+                    <x-button :route="route('job.application.create', $job->id)" :full-width="true">Apply now</x-button>
+                @endauth
             @endcan
             <x-secondary-button :full-width="true">Save job</x-secondary-button>
     </div>
