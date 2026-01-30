@@ -34,6 +34,8 @@ cursor-pointer group">
             </div>
         </div>
 
+        {{ $slot }}
+
         <div class="flex items-center justify-between pt-4">
             <div class="flex items-center gap-1.5 text-sm text-gray-500">
                 <x-heroicon-o-clock class="w-4 h-4" />
