@@ -19,14 +19,52 @@
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                            <div class="bg-green-50 rounded-xl p-3">
-                                <p class="text-xs text-green-700 font-medium">
-                                    Total applications
-                                </p>
-                                <p class="text-lg font-semibold text-green-800">
-                                    {{ $job->job_applications_count }}
-                                </p>
+                            <div x-data="{ open: false }" class="relative">
+                                <button @click="open = !open"
+                                    class="w-full bg-green-50 rounded-xl p-3 text-left hover:bg-green-100 transition">
+
+                                    <p class="text-xs text-green-700 font-medium flex items-center gap-2">
+                                        <x-heroicon-o-users class="w-4 h-4" />
+                                        Applicants
+                                    </p>
+
+                                    <p class="text-lg font-semibold text-green-800 flex items-center justify-between">
+                                        {{ $job->job_applications_count }}
+                                        <x-heroicon-o-chevron-down class="w-4 h-4 text-green-600" />
+                                    </p>
+                                </button>
+
+                                <div x-cloak x-show="open" x-transition @click.outside="open = false"
+                                    class="absolute z-20 mt-2 w-80 bg-white rounded-2xl shadow-lg border p-3">
+
+                                    @if ($job->jobApplications->count())
+                                        <ul class="divide-y text-sm">
+                                            @foreach ($job->jobApplications as $application)
+                                                <li class="py-2 flex items-center justify-between gap-3">
+
+                                                    <div>
+                                                        <p class="font-medium text-gray-800">
+                                                            {{ $application->user->name }}
+                                                        </p>
+                                                        <p class="text-xs text-gray-500">
+                                                            Applied {{ $application->created_at->diffForHumans() }}
+                                                        </p>
+                                                    </div>
+
+                                                    <span class="text-green-700 font-semibold text-sm">
+                                                        ${{ number_format($application->expected_salary, 0, '', ',') }}
+                                                    </span>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @else
+                                        <p class="text-gray-500 text-sm text-center py-4">
+                                            No applications yet
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
+
 
                             <div class="bg-gray-50 rounded-xl p-3">
                                 <p class="text-xs text-gray-600 font-medium">
@@ -78,9 +116,16 @@
             @endforeach
         </div>
     @else
-        <p class="text-gray-500">
-            You haven't posted any job listings yet.
-        </p>
+        <div class="mx-auto flex max-w-lg flex-col items-center justify-center gap-6 text-center">
+            <p class="text-gray-500">
+                You haven't posted any job listings yet.
+            </p>
+
+            <x-button :route="route('jobs.create')">
+                Post Job Listing
+            </x-button>
+        </div>
+
     @endif
 
     {{ $jobListings->withQueryString()->links() }}

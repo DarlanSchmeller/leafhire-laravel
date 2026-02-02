@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="w-full max-w-xl mx-auto my-24">
+    <div class="w-full max-w-xl mx-auto my-6">
         <div class="rounded-3xl p-6 md:p-8">
 
             <h1 class="text-2xl font-semibold text-green-900 mb-6">
