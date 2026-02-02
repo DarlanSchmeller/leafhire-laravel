@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\Employer;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class JobController extends Controller
+class JobListingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(Employer::class)->only('create');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -46,9 +52,9 @@ class JobController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('jobs.create');
     }
 
     /**

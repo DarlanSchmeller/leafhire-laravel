@@ -3,7 +3,7 @@
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobApplicationController;
-use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\MyJobApplicationsController;
 use App\Http\Middleware\Employer;
 use Illuminate\Support\Facades\Route;
@@ -21,12 +21,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('my-job-applications', MyJobApplicationsController::class)->only(['index', 'destroy']);
 
-    Route::middleware(Employer::class)->resource('employer', EmployerController::class)->only(['index', 'create', 'store']);
+    Route::resource('employer', EmployerController::class)->only(['index', 'create', 'store']);
 });
 
 Route::get('/', fn() => redirect()->route('jobs.index'));
 
-Route::resource('jobs', JobController::class)
-    ->only(['index', 'show']);
+Route::resource('jobs', JobListingController::class)
+    ->only(['index', 'show', 'create']);
 
-Route::get('search', [JobController::class, 'search'])->name('search');
+Route::get('search', [JobListingController::class, 'search'])->name('search');

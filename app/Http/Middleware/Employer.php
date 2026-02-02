@@ -15,8 +15,8 @@ class Employer
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (null === $request->user() || null === $request->user()->employer()) {
-            return redirect()->route('employer.create')
+        if (null === $request->user() || null === $request->user()->employer) {
+            return redirect()->route('jobs.index')
                 ->with('error', 'You need to register as an employer first');
         }
 

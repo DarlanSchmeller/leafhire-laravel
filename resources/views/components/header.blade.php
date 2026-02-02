@@ -1,5 +1,5 @@
 <header x-data="{ open: false }" class="sticky top-0 z-40 backdrop-blur bg-blue-50/30">
-    <div class="max-w-7xl mx-auto py-4">
+    <div class="max-w-7xl mx-auto py-4 px-4">
         <div class="flex items-center justify-between">
 
             <a href="{{ route('jobs.index') }}" class="flex items-center gap-3">
@@ -13,26 +13,59 @@
                 </span>
             </a>
 
-            <nav class="hidden md:flex items-center gap-6">
+            <nav class="hidden md:flex items-center gap-2">
+
                 <a href="{{ route('jobs.index') }}"
-                    class="text-lime-700 hover:text-lime-900 font-semibold transition rounded-lg py-2 px-4 border border-lime-600/60 hover:border-lime-800 bg-lime-50/50">
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+               text-lime-700 hover:text-lime-900 hover:bg-lime-100 transition">
+                    <x-heroicon-o-magnifying-glass class="w-5 h-5" />
                     Browse Jobs
                 </a>
 
-                @guest
-                    <x-button :route="route('login')" padding="px-6 py-2.5" rounded="rounded-xl">
-                        Login
-                    </x-button>
-                @endguest
-
                 @auth
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <x-button type="submit" padding="px-6 py-2.5" rounded="rounded-xl">
-                            Logout
-                        </x-button>
-                    </form>
+                    <a href="{{ route('my-job-applications.index') }}"
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium
+                   text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition">
+                        <x-heroicon-o-clipboard-document-check class="w-5 h-5" />
+                        My Applications
+                    </a>
+
+                    @if (auth()->user()->isEmployer())
+                        <a href="{{ route('jobs.create') }}"
+                            class="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold
+                       bg-lime-600 text-white hover:bg-lime-700 transition shadow-sm">
+                            <x-heroicon-o-plus-circle class="w-5 h-5" />
+                            Post a Job
+                        </a>
+                    @endif
+
+                    <div class="flex items-center gap-2 pl-3 ml-2 border-l border-gray-200">
+                        <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-600">
+                            <x-heroicon-o-user class="w-5 h-5" />
+                        </div>
+
+                        <span class="text-sm font-medium text-gray-700">
+                            {{ auth()->user()->name }}
+                        </span>
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button class="p-2 rounded-lg text-gray-500 hover:text-red-600 hover:bg-red-50 transition"
+                                title="Logout">
+                                <x-heroicon-o-arrow-right-on-rectangle class="w-5 h-5" />
+                            </button>
+                        </form>
+                    </div>
                 @endauth
+
+                @guest
+                    <a href="{{ route('login') }}"
+                        class="inline-flex items-center gap-2 px-5 py-2 rounded-xl text-sm font-semibold
+                   bg-lime-600 text-white hover:bg-lime-700 transition shadow-sm">
+                        <x-heroicon-o-arrow-right-on-rectangle class="w-5 h-5" />
+                        Login
+                    </a>
+                @endguest
             </nav>
 
 
@@ -48,25 +81,49 @@
 
     <div x-cloak x-show="open" x-transition @click.outside="open = false"
         class="md:hidden absolute top-full inset-x-0 backdrop-blur-xs">
-        <div class="px-6 py-6 space-y-4">
+        <div class="px-6 py-6 space-y-3 bg-white/95 rounded-b-2xl">
+
             <a href="{{ route('jobs.index') }}"
-                class="block w-full text-center py-3 rounded-xl font-semibold text-lime-700 border border-lime-600/60 bg-lime-50/50 hover:bg-lime-50 transition">
+                class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold
+               text-lime-700 bg-lime-100">
+                <x-heroicon-o-magnifying-glass class="w-5 h-5" />
                 Browse Jobs
             </a>
 
-            @guest
-                <x-button :route="route('login')" padding="py-3" rounded="rounded-xl" fullWidth>
-                    Login
-                </x-button>
-            @endguest
-
             @auth
+                <a href="{{ route('my-job-applications.index') }}"
+                    class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-medium
+                   text-gray-700 bg-gray-100">
+                    <x-heroicon-o-clipboard-document-check class="w-5 h-5" />
+                    My Applications
+                </a>
+
+                @if (auth()->user()->isEmployer())
+                    <a href="{{ route('jobs.create') }}"
+                        class="flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold
+                       bg-lime-600 text-white">
+                        <x-heroicon-o-plus-circle class="w-5 h-5" />
+                        Post a Job
+                    </a>
+                @endif
+
+                <div class="flex items-center justify-center gap-3 pt-4 text-sm text-gray-700">
+                    <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center">
+                        <x-heroicon-o-user class="w-5 h-5" />
+                    </div>
+                    {{ auth()->user()->name }}
+                </div>
+
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <x-button type="submit" padding="py-3" rounded="rounded-xl" fullWidth>
+                    <button
+                        class="w-full flex items-center justify-center gap-2 py-3 rounded-xl
+                       text-sm font-semibold text-red-600 bg-red-50 cursor-pointer">
+                        <x-heroicon-o-arrow-right-on-rectangle class="w-5 h-5" />
                         Logout
-                    </x-button>
+                    </button>
                 </form>
             @endauth
         </div>
+    </div>
 </header>

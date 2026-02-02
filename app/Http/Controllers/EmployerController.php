@@ -20,7 +20,15 @@ class EmployerController extends Controller
 
     public function index(): View
     {
-        return view('employer.index');
+        $jobListings = Auth::user()
+            ->employer
+            ->jobs()
+            ->withCount('jobApplications')
+            ->withAvg('jobApplications', 'expected_salary')
+            ->latest()
+            ->paginate(10);
+
+        return view('employer.index')->with('jobListings', $jobListings);
     }
 
     /**
