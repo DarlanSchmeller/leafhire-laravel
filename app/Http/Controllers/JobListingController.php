@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\Employer;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class JobListingController extends Controller
 {
@@ -60,9 +62,20 @@ class JobListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'location' => 'required|string|max:255',
+            'salary' => 'required|numeric|min:1000',
+            'description' => 'required|string',
+            'experience' => 'required|in:' . implode(',', JobListing::$experience),
+            'category' => 'required|in:' . implode(',', JobListing::$category)
+        ]);
+
+        Auth::user()->employer->jobs()->create($validatedData);
+
+        return redirect()->route('employer.index')->with('success', 'Job listing created successfully!');
     }
 
     /**

@@ -6,7 +6,7 @@
                 Create a New Job Listing
             </h1>
 
-            <form method="POST" action="{{ route('jobs.index') }}" class="flex flex-col gap-6">
+            <form method="POST" action="{{ route('jobs.store') }}" class="flex flex-col gap-6">
                 @csrf
 
                 <x-input name="title" placeholder="Job title" required autofocus>
