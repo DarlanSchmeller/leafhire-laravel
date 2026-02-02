@@ -18,6 +18,11 @@ class EmployerController extends Controller
         $this->authorizeResource(Employer::class);
     }
 
+    public function index(): View
+    {
+        return view('employer.index');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
