@@ -15,6 +15,20 @@ class JobApplicationController extends Controller
     use AuthorizesRequests;
 
     /**
+     * Display a listing of the resource.
+     */
+    public function index(): View
+    {
+        $jobApplications = Auth::user()->jobApplications()->latest()->with([
+            'job' => fn($query) => $query->withCount('jobApplications')
+                ->withAvg('jobApplications', 'expected_salary'),
+            'job.employer',
+        ])->paginate(6);
+
+        return view('job_applications.index')->with('jobApplications', $jobApplications);
+    }
+
+    /**
      * Show the form for creating a new job application.
      */
     public function create(JobListing $job): View|RedirectResponse
@@ -56,34 +70,12 @@ class JobApplicationController extends Controller
     }
 
     /**
-     * Display the specified job application.
+     * Remove the specified resource from storage.
      */
-    public function show(string $id)
+    public function destroy(JobApplication $myJobApplication): RedirectResponse
     {
-        //
-    }
+        $myJobApplication->delete();
 
-    /**
-     * Show the form for editing the specified job application.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified job application in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified job application from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('success', 'Job application cancelled successfully!');
     }
 }
