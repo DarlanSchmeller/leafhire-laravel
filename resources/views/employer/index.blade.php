@@ -84,7 +84,7 @@
                                     Status
                                 </p>
                                 <p class="text-lg font-semibold text-green-800">
-                                    {{ $job->is_active ? 'Active' : 'Closed' }}
+                                    Active
                                 </p>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                                 View
                             </a>
 
-                            <a href="{{ route('jobs.index', $job) }}"
+                            <a href="{{ route('jobs.edit', $job) }}"
                                 class="text-sm font-medium text-blue-600 hover:underline">
                                 Edit
                             </a>

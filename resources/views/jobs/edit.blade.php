@@ -3,13 +3,14 @@
         <div class="rounded-3xl p-6 md:p-8">
 
             <h1 class="text-2xl font-semibold text-green-900 mb-6">
-                Create a New Job Listing
+                Edit Job Listing
             </h1>
 
-            <form method="POST" action="{{ route('jobs.store') }}" class="flex flex-col gap-6">
+            <form method="POST" action="{{ route('jobs.update', $job) }}" class="flex flex-col gap-6">
                 @csrf
+                @method('PATCH')
 
-                <x-input name="title" placeholder="Job title" required autofocus :value="old('title')">
+                <x-input name="title" placeholder="Job title" required autofocus :value="old('title', $job->title)">
                     <x-slot:icon>
                         <x-heroicon-o-briefcase class="w-5 h-5 text-gray-400 shrink-0" />
                     </x-slot:icon>
@@ -20,16 +21,16 @@
                         class="w-full rounded-xl border bg-white border-gray-300 px-4 py-3 text-sm
                                text-green-900 placeholder-gray-400
                                focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600
-                               transition">{{ old('description') }}</textarea>
+                               transition">{{ old('description', $job->description) }}</textarea>
                 </div>
 
-                <x-input type="number" name="salary" placeholder="Salary (optional)" :value="old('salary')">
+                <x-input type="number" name="salary" placeholder="Salary (optional)" :value="old('salary', $job->salary)">
                     <x-slot:icon>
                         <x-heroicon-o-currency-dollar class="w-5 h-5 text-gray-400 shrink-0" />
                     </x-slot:icon>
                 </x-input>
 
-                <x-input name="location" placeholder="Location (Remote, City, Country)" :value="old('location')">
+                <x-input name="location" placeholder="Location (Remote, City, Country)" :value="old('location', $job->location)">
                     <x-slot:icon>
                         <x-heroicon-o-map-pin class="w-5 h-5 text-gray-400 shrink-0" />
                     </x-slot:icon>
@@ -43,7 +44,7 @@
                                transition">
                         <option value="">Select category</option>
                         @foreach (\App\Models\JobListing::$category as $category)
-                            <option value="{{ $category }}" @selected(old('category') === $category)>
+                            <option value="{{ $category }}" @selected(old('category', $job->category) === $category)>
                                 {{ $category }}
                             </option>
                         @endforeach
@@ -58,7 +59,7 @@
                                transition">
                         <option value="">Experience level</option>
                         @foreach (\App\Models\JobListing::$experience as $level)
-                            <option value="{{ $level }}" @selected(old('experience') === $level)>
+                            <option value="{{ $level }}" @selected(old('experience', $job->experience) === $level)>
                                 {{ ucfirst($level) }}
                             </option>
                         @endforeach
@@ -66,7 +67,7 @@
                 </div>
 
                 <x-button type="submit" class="mt-4">
-                    Create Job Listing
+                    Update Job Listing
                 </x-button>
             </form>
 

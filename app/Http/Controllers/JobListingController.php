@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\Employer;
+use App\Http\Requests\JobListingRequest;
 use App\Models\JobListing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -62,18 +63,9 @@ class JobListingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(JobListingRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:1000',
-            'description' => 'required|string',
-            'experience' => 'required|in:' . implode(',', JobListing::$experience),
-            'category' => 'required|in:' . implode(',', JobListing::$category)
-        ]);
-
-        Auth::user()->employer->jobs()->create($validatedData);
+        Auth::user()->employer->jobs()->create($request->validated());
 
         return redirect()->route('employer.index')->with('success', 'Job listing created successfully!');
     }
@@ -94,17 +86,19 @@ class JobListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(JobListing $job): View
     {
-        //
+        return view('jobs.edit')->with('job', $job);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JobListingRequest $request, JobListing $job): RedirectResponse
     {
-        //
+        $job->update($request->validated());
+
+        return redirect()->route('employer.index')->with('success', 'Job listing updated successfully!');
     }
 
     /**
