@@ -26,6 +26,6 @@ Route::middleware('auth')->group(function () {
 Route::get('/', fn() => redirect()->route('jobs.index'));
 
 Route::resource('jobs', JobListingController::class)
-    ->only(['index', 'create', 'show', 'store', 'edit', 'update']);
+    ->only(['index', 'create', 'show', 'store', 'edit', 'update', 'destroy']);
 
 Route::get('search', [JobListingController::class, 'search'])->name('search');

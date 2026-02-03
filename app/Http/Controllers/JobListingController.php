@@ -106,5 +106,11 @@ class JobListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(JobListing $job) {}
+    public function destroy(JobListing $job): RedirectResponse
+    {
+        $this->authorize('delete', $job);
+        $job->delete();
+
+        return redirect()->route('employer.index')->with('success', 'Job deleted successfully!');
+    }
 }

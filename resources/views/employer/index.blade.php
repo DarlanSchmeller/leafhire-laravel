@@ -100,7 +100,7 @@
                                 Edit
                             </a>
 
-                            <form method="POST" action="{{ route('jobs.', $job) }}"
+                            <form method="POST" action="{{ route('jobs.destroy', $job) }}"
                                 onsubmit="return confirm('Are you sure you want to delete this job listing?')">
                                 @csrf
                                 @method('DELETE')

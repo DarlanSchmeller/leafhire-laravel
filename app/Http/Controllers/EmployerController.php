@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employer;
-use App\Models\JobListing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -18,7 +17,7 @@ class EmployerController extends Controller
 
     public function index(): View
     {
-        $this->authorize('viewAnyEmployer', JobListing::class);
+        $this->authorize('viewAny', Employer::class);
         $jobListings = Auth::user()
             ->employer
             ->jobs()
@@ -35,7 +34,7 @@ class EmployerController extends Controller
      */
     public function create(): View
     {
-        $this->authorize('create', JobListing::class);
+        $this->authorize('create', Employer::class);
         return view('employer.create');
     }
 

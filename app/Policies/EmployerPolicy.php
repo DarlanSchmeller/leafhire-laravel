@@ -12,7 +12,7 @@ class EmployerPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->employer !== null;
+        return $user->employer()->exists();
     }
 
     /**
