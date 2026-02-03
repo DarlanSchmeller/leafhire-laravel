@@ -1,59 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🌿 LeafHire - Job Platform ![LeafHire](https://img.shields.io/badge/Job%20Board-Laravel-%234CAF50?style=for-the-badge&labelColor=1F2937&logo=leaflet&logoColor=white)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12-red?logo=laravel&logoColor=white)](https://laravel.com/) [![PHP](https://img.shields.io/badge/PHP-%3E%3D8.2-blue?logo=php&logoColor=white)](https://www.php.net/) [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-## About Laravel
+<img src="public/images/leafwire_screenshot.png" />
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**LeafHire** is a modern, nature-inspired **job board platform** built with **Laravel and TailwindCSS**, focused on clean UI, reusable components, and scalable backend architecture.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Designed as a **portfolio-grade project**, it demonstrates real-world patterns like authentication, filtering, pagination, relationships, and job applications.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Designed for
+- Job board platforms
+- Laravel portfolio projects
+- Recruiter-facing demos
+- Clean UI + backend architecture showcases
 
-## Learning Laravel
+## Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Core
+- Job listings with pagination (desktop & mobile)
+- Job detail pages with related jobs by employer
+- Employer profiles and relationships
+- Job search with filters and query scopes
+- Job application flow with redirect handling
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Authentication
+- Login & logout system
+- Conditional UI based on auth state
+- Protected job application routes
+- Validation via reusable form components
 
-## Laravel Sponsors
+### UI & UX
+- TailwindCSS v4 setup
+- Fully responsive layout
+- Mobile dropdown navigation
+- Reusable UI components (buttons, inputs, cards)
+- Sidebar filters for job search
+- Polished header with dynamic states
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Architecture & DX
+- Query logic extracted from Blade into controllers
+- Custom Eloquent query scopes
+- Factories and seeders with relationships
+- Docker-based local development
+- Laravel Debugbar for development
+- Clean commit history following Conventional Commits
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Tech Stack
+- Laravel 12  
+- PHP 8.2+  
+- TailwindCSS v4  
+- Blade Components  
+- MySQL / PostgreSQL  
+- Docker  
+- Laravel Debugbar  
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Installation
 
-## Code of Conduct
+### 1. Clone the repository
+```bash
+git clone https://github.com/DarlanSchmeller/leafhire-laravel.git
+cd leafhire-laravel
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 2. Install dependencies
+```bash
+composer install
+npm install && npm run build
+```
 
-## Security Vulnerabilities
+### 3. Environment setup
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 4. Run migrations & seeders
+```bash
+php artisan migrate --seed
+```
 
-## License
+## 🐳 Docker Setup (Recommended)
+The project includes a Docker configuration for local development.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+```bash
+docker compose up -d
+```
+
+Update your .env file according to the Docker setup (see .env.example).
+
+
+## Project Highlights
+
+### Job Search (Query Scope)
+- Search logic extracted into an Eloquent scope
+- Clean, reusable filtering
+- Keeps controllers thin and readable
+
+### Blade Components
+- Buttons with dynamic styles
+- Reusable form inputs with validation support
+- Cards and layout components
+
+### Relationships
+- Employers → Jobs
+- Users → Job Applications
+- Factories reflect real database relationships
+
+
+## 🧪 Development Tools
+- Laravel Debugbar (dev-only)
+- Factories & seeders for rapid setup
+- Conventional commit messages
+- Clean, readable commit history
+
+## 📄 License
+This project is open-sourced under the MIT license.
