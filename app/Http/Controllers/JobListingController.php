@@ -22,6 +22,7 @@ class JobListingController extends Controller
      */
     public function index(): View
     {
+        $this->authorize('viewAny', JobListing::class);
         $jobs = JobListing::latest()->paginate(10);
         $categories = JobListing::$category;
 
@@ -75,6 +76,7 @@ class JobListingController extends Controller
      */
     public function show(JobListing $job): View
     {
+        $this->authorize('view', $job);
         $relatedJobs = $job->employer->jobs->where('id', '!=', $job->id)->take(4);
 
         return view('jobs.show')->with([
@@ -104,8 +106,5 @@ class JobListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy(JobListing $job) {}
 }

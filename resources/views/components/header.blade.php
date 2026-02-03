@@ -39,7 +39,7 @@
                         </a>
                     @endif
 
-                    <div class="flex items-center gap-2 pl-3 ml-2 border-l border-gray-200">
+                    <div class="flex items-center gap-2 pl-3 ml-2 border-l border-gray-300">
                         <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-gray-600">
                             <x-heroicon-o-user class="w-5 h-5" />
                         </div>

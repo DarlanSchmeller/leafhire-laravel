@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employer;
+use App\Models\JobListing;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class EmployerController extends Controller
 {
-    use AuthorizesRequests;
-
     public function __construct()
     {
         $this->authorizeResource(Employer::class);
@@ -20,6 +18,7 @@ class EmployerController extends Controller
 
     public function index(): View
     {
+        $this->authorize('viewAnyEmployer', JobListing::class);
         $jobListings = Auth::user()
             ->employer
             ->jobs()
@@ -36,6 +35,7 @@ class EmployerController extends Controller
      */
     public function create(): View
     {
+        $this->authorize('create', JobListing::class);
         return view('employer.create');
     }
 

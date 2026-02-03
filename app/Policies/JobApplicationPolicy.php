@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\JobListing;
+use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class JobListingPolicy
+class JobApplicationPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -27,7 +27,7 @@ class JobListingPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, JobListing $jobListing): bool
+    public function view(User $user, JobApplication $jobApplication): bool
     {
         return true;
     }
@@ -37,19 +37,19 @@ class JobListingPolicy
      */
     public function create(User $user): bool
     {
-        return $user->employer !== null;
+        return $user !== null;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, JobListing $jobListing): bool|Response
+    public function update(User $user, JobApplication $jobApplication): bool|Response
     {
-        if ($jobListing->employer->user_id !== $user->id) {
+        if ($jobApplication->user_id !== $user->id) {
             return false;
         };
 
-        if ($jobListing->jobApplications()->count > 0) {
+        if ($jobApplication->jobApplications()->count > 0) {
             return Response::deny('Cannot change a job listing that already has received applications');
         }
 
@@ -59,28 +59,28 @@ class JobListingPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, JobListing $jobListing): bool
+    public function delete(User $user, JobApplication $jobApplication): bool
     {
-        return $jobListing->employer->user_id === $user->id;
+        return $jobApplication->user_id === $user->id;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, JobListing $jobListing): bool
+    public function restore(User $user, JobApplication $jobApplication): bool
     {
-        return $jobListing->employer->user_id === $user->id;
+        return $jobApplication->user_id === $user->id;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, JobListing $jobListing): bool
+    public function forceDelete(User $user, JobApplication $jobApplication): bool
     {
-        return $jobListing->employer->user_id === $user->id;
+        return $jobApplication->user_id === $user->id;
     }
 
-    public function apply(User $user, JobListing $job): bool
+    public function apply(User $user, JobApplication $job): bool
     {
         return !$job->hasUserApplied($user);
     }

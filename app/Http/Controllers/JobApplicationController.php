@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\JobApplication;
 use App\Models\JobListing;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
@@ -12,13 +11,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class JobApplicationController extends Controller
 {
-    use AuthorizesRequests;
-
     /**
      * Display a listing of the resource.
      */
     public function index(): View
     {
+        $this->authorize('viewAny', JobApplication::class);
         $jobApplications = Auth::user()->jobApplications()->latest()->with([
             'job' => fn($query) => $query->withCount('jobApplications')
                 ->withAvg('jobApplications', 'expected_salary'),
@@ -33,6 +31,7 @@ class JobApplicationController extends Controller
      */
     public function create(JobListing $job): View|RedirectResponse
     {
+        $this->authorize('create', JobApplication::class);
         if (!Auth::user()->can('apply', $job)) {
             return back()->with('error', 'You have already applied to this job');
         };
@@ -74,6 +73,7 @@ class JobApplicationController extends Controller
      */
     public function destroy(JobApplication $myJobApplication): RedirectResponse
     {
+        $this->authorize('delete', $myJobApplication);
         $myJobApplication->delete();
 
         return back()->with('success', 'Job application cancelled successfully!');
