@@ -19,7 +19,8 @@ class JobApplicationController extends Controller
         $this->authorize('viewAny', JobApplication::class);
         $jobApplications = Auth::user()->jobApplications()->latest()->with([
             'job' => fn($query) => $query->withCount('jobApplications')
-                ->withAvg('jobApplications', 'expected_salary'),
+                ->withAvg('jobApplications', 'expected_salary')
+                ->withTrashed(),
             'job.employer',
         ])->paginate(6);
 
